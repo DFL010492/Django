@@ -30,3 +30,10 @@ class Evento (models.Model):
             return True
         else:
             return False
+
+    def vai_começar_em_breve(self):
+        limite_atraso = datetime.now() + timedelta(hours=1)
+        if self.data_evento <= limite_atraso:
+            return True
+        else:
+            return False
