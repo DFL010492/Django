@@ -1,0 +1,43 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Evento</h2>
+    </div>
+    <div class="card-body">
+        <form action="submit" method="post" class="needs-validation">
+            {% csrf_token %}
+
+            <input type="hidden" name="id_evento" value="{{evento.id}}">
+
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" value="{{evento.titulo}}" required>
+                <div class="invalid-feedback">Por favor, insira o título do evento.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="data_evento">Data do Evento</label>
+                <input type="datetime-local" class="form-control" id="data_evento" name="data_evento" value="{{ evento.get_data_input_evento }}" required>
+                <div class="invalid-feedback">Por favor, insira a data e hora do evento.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="descrição">Descrição</label>
+                <textarea class="form-control" id="descrição" name="descrição" rows="5" required>{{evento.descrição}}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="local">Local</label>
+                <textarea class="form-control" id="local" name="local" rows="1" required>{{evento.local}}</textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <a href="/" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

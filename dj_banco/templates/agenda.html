@@ -1,0 +1,27 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Agendamentos</h2>
+        </div>
+        <div class="card-body">
+            <a href="evento/" class="btn btn-primary mb-3">Novo Evento</a>
+            <ul class="list-group">
+
+                {% for evento in eventos %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center {% if evento.get_evento_atrasado %} text-danger {% endif %}">
+                            <span><b>{{ evento.titulo }}</b> - {{ evento.data_evento|date:"d/m/Y H:i" }}</span>
+                            <span>
+                                <a href="evento/delete/{{ evento.id }}" class="btn btn-sm btn-danger ml-2">Excluir</a>
+                                <a href="evento/?id={{ evento.id }}" class="btn btn-sm btn-warning ml-2">Editar</a>
+                            </span>
+                        </div>                        
+                    </li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+    </div>
+{% endblock %}
