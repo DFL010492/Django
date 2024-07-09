@@ -1,0 +1,12 @@
+Dentro da pasta onde se tem a pasta dj_banco se criar criar outra pasta com onde se salva o seu Ambiente virtual com 
+pip install virtualenv
+virtualenv nome_do_ambiente
+
+No Windows, você ativa o ambiente virtual com:
+nome_do_ambiente\Scripts\activate
+
+No Linux/macOS, use:
+source nome_do_ambiente/bin/activate
+
+Para sair do ambiente virtual e voltar ao ambiente global do Python, basta digitar:
+deactivate
