@@ -6,11 +6,21 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from datetime import datetime, timedelta
 from django.http import Http404, JsonResponse
+from django.contrib.auth.models import User
 
 #def index(request):
 #    return redirect ('/agenda/')
 
 def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('agenda')
+        else:
+            messages.error(request, 'Usuário ou senha incorretos.')
     return render(request, 'login.html')
 
 @login_required(login_url='/login/')
@@ -94,3 +104,21 @@ def json_lista_evento(request):
     usuario= request.user
     evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
     return JsonResponse(list(evento), safe=False)
+
+def cadastro(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        senha = request.POST['senha']
+        senha2 = request.POST['senha2']
+
+        if senha == senha2:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Nome do usuário já existe.')
+            else:
+                user = User.objects.create_user(username=username, password=senha)
+                user.save()
+                login(request, user)
+                return redirect('/')
+        else:
+            messages.error(request, 'As senhas não coincidem.')
+    return render(request, 'cadastro.html')

@@ -2,13 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Agenda</title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f8f9fa;
         }
-        .login-container {
+        .cadastro-container {
             max-width: 400px;
             margin: 50px auto;
             padding: 20px;
@@ -16,26 +16,30 @@
             background-color: #fff;
             border-radius: 8px;
         }
-        .login-title {
+        .cadastro-title {
             margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="login-container">
-            <h1 class="login-title text-center">Login</h1>
-            <form action="submit" method="post">
+        <div class="cadastro-container">
+            <h1 class="cadastro-title text-center">Cadastro</h1>
+            <form action="{% url 'cadastro' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">Usuário:</label>
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Senha:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="senha">Senha:</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <div class="form-group">
+                    <label for="senha2">Confirme a Senha:</label>
+                    <input type="password" class="form-control" id="senha2" name="senha2" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
             </form>
             <br>
             {% for message in messages %}
@@ -44,7 +48,7 @@
                 </div>
             {% endfor %}
             <div class="text-center">
-                <a href="/cadastro" class="btn btn-link">Cadastre-se</a>
+                <a href="/login" class="btn btn-link">Voltar para Login</a>
             </div>
         </div>
     </div>
